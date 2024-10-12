@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validasi Formulir Sederhana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        form {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Formulir Pendaftaran</h2>
+    <form id="myForm" onsubmit="return validateForm()">
+        <label for="nama">Nama Lengkap:</label>
+        <input type="text" id="nama" name="nama">
+        <div id="namaError" class="error">Nama harus diisi</div>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <div id="emailError" class="error">Masukkan alamat email yang valid</div>
+
+        <label for="password">Kata Sandi:</label>
+        <input type="password" id="password" name="password">
+        <div id="passwordError" class="error">Kata sandi harus diisi</div>
+
+        <button type="submit">Daftar</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            let nama = document.getElementById('nama').value;
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+            let valid = true;
+
+            // Reset error messages
+            document.getElementById('namaError').style.display = 'none';
+            document.getElementById('emailError').style.display = 'none';
+            document.getElementById('passwordError').style.display = 'none';
+
+            // Validate nama
+            if (nama === "") {
+                document.getElementById('namaError').style.display = 'block';
+                valid = false;
+            }
+
+            // Validate email
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email)) {
+                document.getElementById('emailError').style.display = 'block';
+                valid = false;
+            }
+
+            // Validate password
+            if (password === "") {
+                document.getElementById('passwordError').style.display = 'block';
+                valid = false;
+            }
+
+            return valid;
+        }
+    </script>
+
+</body>
+</html>
